@@ -15,7 +15,9 @@ public class Login {
     public static void main(String[] args) {
         Login login = new Login();
         login.enter();
-        login.createItemAndQuantity();
+        login.showMenu();
+
+        login.chooseOption();
 
     }
 
@@ -43,6 +45,14 @@ public class Login {
 
     public void createItemAndQuantity() {
         boundary.showCreateOrderPage();
+    }
+
+    public void showMenu(){
+        boundary.showMenu();
+    }
+
+    public void chooseOption(){
+        boundary.chooseOption();
     }
 
 

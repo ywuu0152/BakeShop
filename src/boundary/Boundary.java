@@ -118,10 +118,52 @@ public class Boundary {
             }
         }
         orderController.createOrder(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status);
-        System.out.println(orderController.getOrderList().toString());;
+        System.out.println("Create order successfully!");
 
     }
 
+    public void showMenu(){
+        String currentUser = userController.getCurrentUser().getRole();
+
+        switch (currentUser){
+            case "Manager":
+                System.out.println("Welcome to the Bask shop system! Manager");
+                System.out.println("Please choose the options below:");
+                System.out.println("1. Create order");
+                break;
+
+            case "Owner":
+                System.out.println("Welcome to the Bask shop system! Oliver");
+                System.out.println("Please choose the options below:");
+                System.out.println("1. Create order");
+                break;
+
+            case "Staff":
+                System.out.println("Welcome to the Bask shop system!");
+                System.out.println("Please choose the options below:");
+                System.out.println("1. Create order");
+                break;
+        }
+
+    }
+
+    public void chooseOption(){
+        boolean a = true;
+
+        while (a) {
+            Scanner scanner = new Scanner(System.in);
+            String option = scanner.nextLine();
+
+            switch (option) {
+                case "1":
+                    showCreateOrderPage();
+                    a = false;
+                    break;
+                default:
+                    System.out.println("input error, please re-input");
+            }
+        }
+    }
 
 
     public Boolean confirm(){
