@@ -139,21 +139,21 @@ public class Boundary {
                 System.out.println("Welcome to the Bask shop system! Manager");
                 System.out.println("Please choose the options below:");
                 System.out.println("1. Create order");
-                System.out.println("2. Show the report");
+                System.out.println("2. Show the total number of coffee beans (in quantity) sold in last month in each store");
                 break;
 
             case "Owner":
                 System.out.println("Welcome to the Bask shop system! Oliver");
                 System.out.println("Please choose the options below:");
                 System.out.println("1. Create order");
-                System.out.println("2. Show the report");
+                System.out.println("2. Show the total number of coffee beans (in quantity) sold in last month in each store");
                 break;
 
             case "Staff":
                 System.out.println("Welcome to the Bask shop system!");
                 System.out.println("Please choose the options below:");
                 System.out.println("1. Create order");
-                System.out.println("2. Show the report");
+                System.out.println("2. Show the total number of coffee beans (in quantity) sold in last month in each store");
                 break;
         }
 
