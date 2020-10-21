@@ -36,8 +36,9 @@ public class OrderController {
         File file = new File("File/Order");
         try {
             Scanner scan = new Scanner(file);
-            Order order = new Order();
+
             while (scan.hasNextLine()){
+                Order order = new Order();
                 String textLine = scan.nextLine();
                 String[] str = textLine.split(",");
                 order.setStoreId(str[0]);
@@ -58,22 +59,27 @@ public class OrderController {
                 order.setTotalPrice(total);
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy H:mm");
-                LocalDateTime data = LocalDateTime.parse(str[7] + " " + str[8], formatter);
+                LocalDateTime date = LocalDateTime.parse(str[7] + " " + str[8], formatter);
                 order.setCustomerName(str[9]);
                 order.setStatus(str[10]);
+                order.setCustomerPhoneNumber(str[11]);
 
-                order.setCreateTime(data);
+                order.setCreateTime(date);
 
                 orderList.add(order);
             }
+            System.out.println(orderList.get(1).getItemAndItsQuantity().get(itemController.searchItemByName("coffee beans")));
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+
+
     public void createOrder(String orderId, Map<Item, Integer> itemAndItsQuantity, String createBy, LocalDateTime createTime,
-                            String customerName, float totalPrice, String storeId, String status) {
-        Order order = new Order(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status);
+                            String customerName, float totalPrice, String storeId, String status, String customerPhoneNumber) {
+        Order order = new Order(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status, customerPhoneNumber);
         orderList.add(order);
     }
 

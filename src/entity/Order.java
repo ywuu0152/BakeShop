@@ -15,13 +15,14 @@ public class Order {
     private String customerName;
     private float totalPrice;
     private String storeId;
+    private String customerPhoneNumber;
 
     public Order() {
 
     }
 
     public Order(String orderId, Map<Item, Integer> itemAndItsQuantity, String createBy, LocalDateTime createTime,
-                 String customerName, float totalPrice, String storeId, String status) {
+                 String customerName, float totalPrice, String storeId, String status, String customerPhoneNumber) {
         this.orderId = orderId;
         this.itemAndItsQuantity = itemAndItsQuantity;
         this.createBy = createBy;
@@ -30,6 +31,7 @@ public class Order {
         this.customerName = customerName;
         this.totalPrice = totalPrice;
         this.storeId = storeId;
+        this.customerPhoneNumber = customerPhoneNumber;
     }
 
     public String getOrderId() {
@@ -96,6 +98,14 @@ public class Order {
         this.storeId = storeId;
     }
 
+    public String getCustomerPhoneNumber() {
+        return customerPhoneNumber;
+    }
+
+    public void setCustomerPhoneNumber(String customerPhoneNumber) {
+        this.customerPhoneNumber = customerPhoneNumber;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -109,6 +119,7 @@ public class Order {
                 ", customerName= " + customerName + '\'' +
                 ", totalPrice=" + totalPrice + '\'' +
                 ", storeId='" + storeId + '\'' +
+                ", customer phone number='" + customerPhoneNumber + '\'' +
                 '}';
     }
 }

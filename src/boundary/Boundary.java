@@ -9,6 +9,7 @@ import entity.Item;
 import entity.Order;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -62,6 +63,7 @@ public class Boundary {
         String orderId = "";
         String storeId = "";
         String createBy = "";
+        String customerPhoneNumber = "null";
         LocalDateTime createTime = LocalDateTime.now();
         String customerName = "";
         float totalPrice = 0;
@@ -79,6 +81,11 @@ public class Boundary {
                 int itemNumber = scan.nextInt();
                 for (Item i : itemController.itemList) {
                     if (i.getItemName().equals(itemName)) {
+                        if (itemName.equals("coffee beans")){
+                            System.out.println("Please enter the phone number of customer");
+                            Scanner scanner = new Scanner(System.in);
+                            customerPhoneNumber = scanner.nextLine();
+                        }
                         int number = inventoryController.searchItemQuantity(itemName);
                         if (number >= itemNumber) {
                             itemAndItsQuantity.put(i, itemNumber);
@@ -103,10 +110,8 @@ public class Boundary {
             totalPrice = 0;
             for (Item key : itemAndItsQuantity.keySet()) {
                 totalPrice += key.getPrice() * itemAndItsQuantity.get(key);
-                System.out.println(itemAndItsQuantity.get(key));
                 System.out.println(key.getItemName() + "   " + itemAndItsQuantity.get(key));
             }
-
 
             System.out.println("Total price: $" + totalPrice);
             System.out.println("Do you want to confirm this order?");
@@ -117,10 +122,14 @@ public class Boundary {
                 a = true;
             }
         }
-        orderController.createOrder(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status);
+        orderController.createOrder(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status, customerPhoneNumber);
         System.out.println("Create order successfully!");
+    }
+
+    public void showCreateCoffeeBeansOrderPage(){
 
     }
+
 
     public void showMenu(){
         String currentUser = userController.getCurrentUser().getRole();
@@ -130,22 +139,64 @@ public class Boundary {
                 System.out.println("Welcome to the Bask shop system! Manager");
                 System.out.println("Please choose the options below:");
                 System.out.println("1. Create order");
+                System.out.println("2. Show the report");
                 break;
 
             case "Owner":
                 System.out.println("Welcome to the Bask shop system! Oliver");
                 System.out.println("Please choose the options below:");
                 System.out.println("1. Create order");
+                System.out.println("2. Show the report");
                 break;
 
             case "Staff":
                 System.out.println("Welcome to the Bask shop system!");
                 System.out.println("Please choose the options below:");
                 System.out.println("1. Create order");
+                System.out.println("2. Show the report");
                 break;
         }
 
     }
+
+    public void showMonthlyCoffeeBeansSold(){
+        ArrayList<Order> newOrderList= new ArrayList();
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        for (Order o: orderController.getOrderList()) {
+            if (!o.getCustomerPhoneNumber().equals("null")
+                    && o.getCreateTime().isAfter(currentTime.minusDays(30))
+            )
+
+            {
+                    newOrderList.add(o);
+            }
+        }
+
+        System.out.println(newOrderList.toString());
+
+        for (int i = 1; i < 11; i++) {
+            int quantity = 0;
+            for (Order o: newOrderList){
+                int storeId = Integer.parseInt(o.getStoreId());
+                if (storeId == i){
+//                    Item item = itemController.searchItemByName("coffee beans");
+//                    System.out.println(item);
+//                    System.out.println(o.getItemAndItsQuantity().get(item));
+                    for(Map.Entry<Item,Integer> entry : o.getItemAndItsQuantity().entrySet()){
+                        if (entry.getKey().getItemName().equals("coffee beans")){
+                            quantity += entry.getValue();
+                        }
+                    }
+//                    quantity = o.getItemAndItsQuantity().get(item);
+                }
+            }
+            System.out.println("The coffee bean sales of store " + i +" this month are " + quantity);
+        }
+    }
+
+
+
 
     public void chooseOption(){
         boolean a = true;
@@ -159,11 +210,16 @@ public class Boundary {
                     showCreateOrderPage();
                     a = false;
                     break;
+                case "2":
+                    showMonthlyCoffeeBeansSold();
+                    a = false;
+                    break;
                 default:
                     System.out.println("input error, please re-input");
             }
         }
     }
+
 
 
     public Boolean confirm(){
