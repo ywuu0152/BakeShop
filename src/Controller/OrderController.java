@@ -75,8 +75,6 @@ public class OrderController {
         }
     }
 
-
-
     public void createOrder(String orderId, Map<Item, Integer> itemAndItsQuantity, String createBy, LocalDateTime createTime,
                             String customerName, float totalPrice, String storeId, String status, String customerPhoneNumber) {
         Order order = new Order(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status, customerPhoneNumber);
