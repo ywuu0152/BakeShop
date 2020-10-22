@@ -124,6 +124,7 @@ public class Boundary {
         }
         orderController.createOrder(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status, customerPhoneNumber);
         System.out.println("Create order successfully!");
+//        System.out.println(orderController.getOrderList().toString());
     }
 
     public void showCreateCoffeeBeansOrderPage(){
@@ -164,11 +165,7 @@ public class Boundary {
         LocalDateTime currentTime = LocalDateTime.now();
 
         for (Order o: orderController.getOrderList()) {
-            if (!o.getCustomerPhoneNumber().equals("null")
-                    && o.getCreateTime().isAfter(currentTime.minusDays(30))
-            )
-
-            {
+            if (!o.getCustomerPhoneNumber().equals("null") && o.getCreateTime().isAfter(currentTime.minusDays(30))) {
                     newOrderList.add(o);
             }
         }
@@ -195,6 +192,17 @@ public class Boundary {
         }
     }
 
+    public void showLastMonthFoodSold(){
+        ArrayList<Order> newOrderList= new ArrayList();
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        for (Order o: orderController.getOrderList()) {
+            if (o.getCreateTime().isAfter(currentTime.minusDays(30))) {
+                newOrderList.add(o);
+            }
+        }
+
+    }
 
 
 
