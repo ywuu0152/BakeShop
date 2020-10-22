@@ -204,6 +204,20 @@ public class Boundary {
 
     }
 
+    public void showLastMonthCoffeeSold(){
+
+
+    }
+
+
+    public void showLastMonthSoldDollar(){
+
+
+    }
+
+
+
+
 
 
     public void chooseOption(){
