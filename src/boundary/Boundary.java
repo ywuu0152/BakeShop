@@ -215,6 +215,11 @@ public class Boundary {
 
     }
 
+    public void showLowInventoryItem() {
+
+        
+    }
+
 
 
 
