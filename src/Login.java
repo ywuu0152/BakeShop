@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Login {
-    private Boundary boundary;
+//    private Boundary boundary;
 
     public Login() {
     }
@@ -22,8 +22,8 @@ public class Login {
     }
 
     public static void main(String[] args) {
-        Boundary boundary = new Boundary();
-        Login login = new Login(boundary);
+//        Boundary boundary = new Boundary();
+        Login login = new Login();
         login.enter();
         login.showMenu();
 
@@ -31,7 +31,7 @@ public class Login {
 
     }
 
-    //Boundary boundary = new Boundary();
+    Boundary boundary = new Boundary();
 
 
 

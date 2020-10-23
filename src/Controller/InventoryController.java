@@ -10,15 +10,15 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class InventoryController {
-//    //public static void main(String[] args) {
-//        InventoryController inventoryController = new InventoryController("1");
-//    }
+    public static void main(String[] args) {
+        InventoryController inventoryController = new InventoryController("1");
+    }
 
 
 
-    private ArrayList<Inventory> inventoryList;
-    private ItemController itemController;
-    private Inventory inventory = new Inventory();
+    private ArrayList<Inventory> inventoryList = new ArrayList<>();
+    ItemController itemController = new ItemController();
+    public Inventory inventory = new Inventory();
 
     public InventoryController(String storeID) {
 

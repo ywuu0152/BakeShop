@@ -140,21 +140,27 @@ public class Boundary {
                 System.out.println("Welcome to the Bask shop system! Manager");
                 System.out.println("Please choose the options below:");
                 System.out.println("1. Create order");
-                System.out.println("2. Show the total number of coffee beans (in quantity) sold in last month in each store");
+                System.out.println("2. Show the total number of coffee beans sold in last month in each store");
+                System.out.println("3. Show the total number of food items sold in last month in each store");
+                System.out.println("4. Show the total number of coffee items sold in last month in each store");
                 break;
 
             case "Owner":
                 System.out.println("Welcome to the Bask shop system! Oliver");
                 System.out.println("Please choose the options below:");
                 System.out.println("1. Create order");
-                System.out.println("2. Show the total number of coffee beans (in quantity) sold in last month in each store");
+                System.out.println("2. Show the total number of coffee beans sold in last month in each store");
+                System.out.println("3. Show the total number of food items sold in last month in each store");
+                System.out.println("4. Show the total number of coffee items sold in last month in each store");
                 break;
 
             case "Staff":
                 System.out.println("Welcome to the Bask shop system!");
                 System.out.println("Please choose the options below:");
                 System.out.println("1. Create order");
-                System.out.println("2. Show the total number of coffee beans (in quantity) sold in last month in each store");
+                System.out.println("2. Show the total number of coffee beans sold in last month in each store");
+                System.out.println("3. Show the total number of food items sold in last month in each store");
+                System.out.println("4. Show the total number of coffee items sold in last month in each store");
                 break;
         }
 
@@ -170,7 +176,7 @@ public class Boundary {
             }
         }
 
-        System.out.println(newOrderList.toString());
+//        System.out.println(newOrderList.toString());
 
         for (int i = 1; i < 11; i++) {
             int quantity = 0;
@@ -188,7 +194,7 @@ public class Boundary {
 //                    quantity = o.getItemAndItsQuantity().get(item);
                 }
             }
-            System.out.println("The coffee bean sales of store " + i +" this month are " + quantity);
+            System.out.println("The coffee bean sales of store(in quantity) " + i +" this month are " + quantity);
         }
     }
 
@@ -201,13 +207,50 @@ public class Boundary {
                 newOrderList.add(o);
             }
         }
+        for (int i = 1; i < 11; i++) {
+            int quantity = 0;
+            for (Order o: newOrderList) {
+                int storeId = Integer.parseInt(o.getStoreId());
+                if (storeId == i) {
+                    for (Map.Entry<Item, Integer> entry : o.getItemAndItsQuantity().entrySet()) {
+                        if (entry.getKey().getSort().equals("food")) {
+                            quantity += entry.getValue();
+                        }
+                    }
+                }
 
+            }
+            System.out.println("The food sales of store " + i + "(in quantity) this month are " + quantity);
+        }
     }
 
     public void showLastMonthCoffeeSold(){
+        ArrayList<Order> newOrderList= new ArrayList();
+        LocalDateTime currentTime = LocalDateTime.now();
 
+        for (Order o: orderController.getOrderList()) {
+            if (o.getCreateTime().isAfter(currentTime.minusDays(30))) {
+                newOrderList.add(o);
+            }
+        }
+        for (int i = 1; i < 11; i++) {
+            int quantity = 0;
+            for (Order o: newOrderList) {
+                int storeId = Integer.parseInt(o.getStoreId());
+                if (storeId == i) {
+                    for (Map.Entry<Item, Integer> entry : o.getItemAndItsQuantity().entrySet()) {
+                        if (entry.getKey().getSort().equals("coffee")) {
+                            quantity += entry.getValue();
+                        }
+                    }
+                }
 
+            }
+            System.out.println("The food sales of store " + i + "(in quantity) this month are " + quantity);
+        }
     }
+
+
 
 
     public void showLastMonthSoldDollar(){
@@ -239,6 +282,14 @@ public class Boundary {
                     break;
                 case "2":
                     showMonthlyCoffeeBeansSold();
+                    a = false;
+                    break;
+                case "3":
+                    showLastMonthFoodSold();
+                    a = false;
+                    break;
+                case "4":
+                    showLastMonthCoffeeSold();
                     a = false;
                     break;
                 default:
