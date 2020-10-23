@@ -218,7 +218,6 @@ public class Boundary {
                         }
                     }
                 }
-
             }
             System.out.println("The food sales of store " + i + "(in quantity) this month are " + quantity);
         }
@@ -251,9 +250,16 @@ public class Boundary {
     }
 
 
-
-
     public void showLastMonthSoldDollar(){
+        ArrayList<Order> newOrderList= new ArrayList();
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        for (Order o: orderController.getOrderList()) {
+            if (o.getCreateTime().isAfter(currentTime.minusDays(30))) {
+                newOrderList.add(o);
+            }
+        }
+
 
 
     }
