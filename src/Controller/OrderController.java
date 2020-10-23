@@ -68,7 +68,7 @@ public class OrderController {
 
                 orderList.add(order);
             }
-            System.out.println(orderList.get(1).getItemAndItsQuantity().get(itemController.searchItemByName("coffee beans")));
+//            System.out.println(orderList.get(1).getItemAndItsQuantity().get(itemController.searchItemByName("coffee beans")));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

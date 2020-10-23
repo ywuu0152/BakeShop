@@ -143,6 +143,7 @@ public class Boundary {
                 System.out.println("2. Show the total number of coffee beans sold in last month in each store");
                 System.out.println("3. Show the total number of food items sold in last month in each store");
                 System.out.println("4. Show the total number of coffee items sold in last month in each store");
+                System.out.println("5. Show the total sale made in dollars last month in each store");
                 break;
 
             case "Owner":
@@ -152,6 +153,7 @@ public class Boundary {
                 System.out.println("2. Show the total number of coffee beans sold in last month in each store");
                 System.out.println("3. Show the total number of food items sold in last month in each store");
                 System.out.println("4. Show the total number of coffee items sold in last month in each store");
+                System.out.println("5. Show the total sale made in dollars last month in each store");
                 break;
 
             case "Staff":
@@ -161,6 +163,7 @@ public class Boundary {
                 System.out.println("2. Show the total number of coffee beans sold in last month in each store");
                 System.out.println("3. Show the total number of food items sold in last month in each store");
                 System.out.println("4. Show the total number of coffee items sold in last month in each store");
+                System.out.println("5. Show the total sale made in dollars last month in each store");
                 break;
         }
 
@@ -243,7 +246,6 @@ public class Boundary {
                         }
                     }
                 }
-
             }
             System.out.println("The food sales of store " + i + "(in quantity) this month are " + quantity);
         }
@@ -259,8 +261,16 @@ public class Boundary {
                 newOrderList.add(o);
             }
         }
-
-
+        for (int i = 1; i < 11; i++) {
+            int dollars = 0;
+            for (Order o: newOrderList) {
+                int storeId = Integer.parseInt(o.getStoreId());
+                if (storeId == i) {
+                    dollars += o.getTotalPrice();
+                }
+            }
+            System.out.println("The total sales of store " + i + "(in dollars) this month are $" + dollars);
+        }
 
     }
 
@@ -296,6 +306,10 @@ public class Boundary {
                     break;
                 case "4":
                     showLastMonthCoffeeSold();
+                    a = false;
+                    break;
+                case "5":
+                    showLastMonthSoldDollar();
                     a = false;
                     break;
                 default:

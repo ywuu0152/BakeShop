@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class InventoryController {
-    public static void main(String[] args) {
-        InventoryController inventoryController = new InventoryController("1");
-    }
+//    public static void main(String[] args) {
+//        InventoryController inventoryController = new InventoryController("1");
+//    }
 
 
 
