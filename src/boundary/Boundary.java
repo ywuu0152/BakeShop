@@ -124,7 +124,7 @@ public class Boundary {
         }
         orderController.createOrder(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status, customerPhoneNumber);
         System.out.println("Create order successfully!");
-//        System.out.println(orderController.getOrderList().toString());
+        System.out.println(orderController.getOrderList().toString());
     }
 
     public void showCreateCoffeeBeansOrderPage(){
