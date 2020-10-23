@@ -10,19 +10,26 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class InventoryController {
-    public static void main(String[] args) {
-        InventoryController inventoryController = new InventoryController("1");
+//    //public static void main(String[] args) {
+//        InventoryController inventoryController = new InventoryController("1");
+//    }
+
+
+
+    private ArrayList<Inventory> inventoryList;
+    private ItemController itemController;
+    private Inventory inventory = new Inventory();
+
+    public InventoryController(String storeID) {
+
+        readInventory(storeID);
     }
 
-    public InventoryController(String storeId){
-        readInventory(storeId);
-    }
-
-    public ArrayList<Inventory> inventoryList = new ArrayList();
-    ItemController itemController = new ItemController();
-
-    public Inventory inventory = new Inventory();
-
+//    public InventoryController(String storeId){
+//        readInventory(storeId);
+//    }
+//
+//    }
     public void readInventory(String storeId){
 
         String fileName = "File/Inventory" + storeId;
@@ -35,19 +42,18 @@ public class InventoryController {
                 String textLine = scan.nextLine();
                 String[] str = textLine.split(",");
                 inventory.getItemAndItsQuantity().put(itemController.searchItemByName(str[0]), Integer.parseInt(str[1]));
-                }
+            }
             inventoryList.add(inventory);
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-    }
+     }
 
-    public int searchItemQuantity (String itemName){
-        return inventory.getItemAndItsQuantity().get(itemController.searchItemByName(itemName));
+     public int searchItemQuantity (String itemName) {
+         return inventory.getItemAndItsQuantity().get(itemController.searchItemByName(itemName));
 
-    }
-
-
+     }
 
 
 }

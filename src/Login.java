@@ -12,9 +12,18 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Login {
-    public static void main(String[] args) {
+    private Boundary boundary;
 
-        Login login = new Login();
+    public Login() {
+    }
+
+    public Login(Boundary boundary) {
+        this.boundary = boundary;
+    }
+
+    public static void main(String[] args) {
+        Boundary boundary = new Boundary();
+        Login login = new Login(boundary);
         login.enter();
         login.showMenu();
 
@@ -22,13 +31,15 @@ public class Login {
 
     }
 
-    Boundary boundary = new Boundary();
+    //Boundary boundary = new Boundary();
+
+
 
     public void enter() {
         Scanner userInput = new Scanner(System.in);
         boolean a = true;
         while (a){
-            System.out.println("Please enter your username ");
+            System.out.println("Please enter your username: ");
             String username = userInput.nextLine();
 
             System.out.println("Please enter your password: ");
