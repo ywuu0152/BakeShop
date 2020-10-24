@@ -316,19 +316,25 @@ public class Boundary {
             order.getItemAndItsQuantity();
         }
 
-        List<Map.Entry<Item, Integer>> infoIds = new ArrayList<Map.Entry<Item, Integer>>(cofferAndSale.entrySet());
-        ArrayList<Integer> sales = new ArrayList<>();
-        Collections.sort(infoIds, new Comparator<Map.Entry<Item, Integer>>() {
-            public int compare(Map.Entry<Item, Integer> o1, Map.Entry<Item, Integer> o2) {
-                return (o2.getValue() - o1.getValue());
-                //return (o1.getKey()).toString().compareTo(o2.getKey());
-            }
-        });
-
-        for (int i = 0; i < infoIds.size(); i++) {
-            String id = infoIds.get(i).getKey().getItemName();
-            System.out.println("coffee name: " + id +"sale: " + infoIds.get(i).getValue() );
+        for (Item i : cofferAndSale.keySet())
+        {
+            System.out.println("coffee name: " + i.getItemName() +"sale: " + cofferAndSale.get(i) );
         }
+
+//        List<Map.Entry<Item, Integer>> infoIds = new ArrayList<Map.Entry<Item, Integer>>(cofferAndSale.entrySet());
+//        ArrayList<Integer> sales = new ArrayList<>();
+//        Collections.sort(infoIds, new Comparator<Map.Entry<Item, Integer>>() {
+//            public int compare(Map.Entry<Item, Integer> o1, Map.Entry<Item, Integer> o2) {
+//                return (o2.getValue() - o1.getValue());
+//                //return (o1.getKey()).toString().compareTo(o2.getKey());
+//            }
+//        });
+//
+//        for (int i = 0; i < infoIds.size(); i++) {
+//            String id = infoIds.get(i).getKey().getItemName();
+//            System.out.println("coffee name: " + id +"sale: " + infoIds.get(i).getValue() );
+//        }
+
     }
 
 
