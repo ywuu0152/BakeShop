@@ -141,6 +141,7 @@ public class Boundary {
                 System.out.println("3. Show the total number of food items sold in last month in each store");
                 System.out.println("4. Show the total number of coffee items sold in last month in each store");
                 System.out.println("5. Show the total sale made in dollars last month in each store");
+                System.out.println("6. Show the type of coffee sold the most per store in the last month");
                 break;
 
             case "Owner":
@@ -151,6 +152,7 @@ public class Boundary {
                 System.out.println("3. Show the total number of food items sold in last month in each store");
                 System.out.println("4. Show the total number of coffee items sold in last month in each store");
                 System.out.println("5. Show the total sale made in dollars last month in each store");
+                System.out.println("6. Show the type of coffee sold the most per store in the last month");
                 break;
 
             case "Staff":
@@ -161,6 +163,7 @@ public class Boundary {
                 System.out.println("3. Show the total number of food items sold in last month in each store");
                 System.out.println("4. Show the total number of coffee items sold in last month in each store");
                 System.out.println("5. Show the total sale made in dollars last month in each store");
+                System.out.println("6. Show the type of coffee sold the most per store in the last month");
                 break;
         }
 
@@ -277,7 +280,7 @@ public class Boundary {
     }
 
 
-    public void typeCoffeeSoldMostLastMonth(String storeID){
+    public void typeCoffeeSoldMostLastMonth(){
         ArrayList<Order> orders = new ArrayList<>();
         LocalDateTime currentDate = LocalDateTime.now();
         int lastMonth = currentDate.getMonthValue();
@@ -315,7 +318,6 @@ public class Boundary {
 
         List<Map.Entry<Item, Integer>> infoIds = new ArrayList<Map.Entry<Item, Integer>>(cofferAndSale.entrySet());
         ArrayList<Integer> sales = new ArrayList<>();
-        int sale = 0;
         Collections.sort(infoIds, new Comparator<Map.Entry<Item, Integer>>() {
             public int compare(Map.Entry<Item, Integer> o1, Map.Entry<Item, Integer> o2) {
                 return (o2.getValue() - o1.getValue());
@@ -359,6 +361,11 @@ public class Boundary {
                     showLastMonthSoldDollar();
                     a = false;
                     break;
+                case "6":
+                    typeCoffeeSoldMostLastMonth();
+                    a = false;
+                    break;
+
                 default:
                     System.out.println("input error, please re-input");
             }
