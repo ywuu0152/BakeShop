@@ -280,7 +280,32 @@ public class Boundary {
     }
 
 
+    public void typeCoffeeSoldMostLastMonth(String storeID){
+        ArrayList<Order> orders = new ArrayList<>();
+        LocalDateTime currentDate = LocalDateTime.now();
+        int lastMonth = currentDate.getMonthValue();
+        for (Order order: orderController.getOrderList())
+        {
+            if (order.getCreateTime().getMonthValue() == lastMonth)
+                orders.add(order);
+        }
 
+        Map<Item, Integer> cofferAndSale = new HashMap<>();
+        for(Order order: orders)
+        {
+            for(Map.Entry<Item, Integer> entry: order.getItemAndItsQuantity().entrySet()){
+                Item itemKey = entry.getKey();
+                if (itemKey.getSort().equalsIgnoreCase("coffee"))
+                {
+                    int sale = cofferAndSale.get(itemKey);
+                    cofferAndSale.put(itemKey, entry.getValue() + sale);
+                }
+            }
+            order.getItemAndItsQuantity();
+        }
+
+
+    }
 
 
 
