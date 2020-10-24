@@ -13,7 +13,7 @@ public class Order {
     private LocalDateTime createTime;
     private String status;
     private String customerName;
-    private float totalPrice;
+    private double totalPrice;
     private String storeId;
     private String customerPhoneNumber;
 
@@ -22,7 +22,7 @@ public class Order {
     }
 
     public Order(String orderId, Map<Item, Integer> itemAndItsQuantity, String createBy, LocalDateTime createTime,
-                 String customerName, float totalPrice, String storeId, String status, String customerPhoneNumber) {
+                 String customerName, double totalPrice, String storeId, String status, String customerPhoneNumber) {
         this.orderId = orderId;
         this.itemAndItsQuantity = itemAndItsQuantity;
         this.createBy = createBy;
@@ -82,11 +82,11 @@ public class Order {
         this.customerName = customerName;
     }
 
-    public float getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

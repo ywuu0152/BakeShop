@@ -14,6 +14,7 @@ public class OrderController {
 
     public static void main(String[] args) {
         OrderController orderController = new OrderController();
+        orderController.readOrder();
     }
 
     private ArrayList<Order> orderList= new ArrayList();
@@ -76,7 +77,7 @@ public class OrderController {
     }
 
     public void createOrder(String orderId, Map<Item, Integer> itemAndItsQuantity, String createBy, LocalDateTime createTime,
-                            String customerName, float totalPrice, String storeId, String status, String customerPhoneNumber) {
+                            String customerName, double totalPrice, String storeId, String status, String customerPhoneNumber) {
         Order order = new Order(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status, customerPhoneNumber);
         orderList.add(order);
     }

@@ -66,7 +66,7 @@ public class Boundary {
         String customerPhoneNumber = "null";
         LocalDateTime createTime = LocalDateTime.now();
         String customerName = "";
-        float totalPrice = 0;
+        double totalPrice = 0;
         String status = "Ready";
         ItemController itemController = new ItemController();
         InventoryController inventoryController = new InventoryController(userController.getCurrentUser().getStoreId());
