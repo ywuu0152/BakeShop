@@ -9,10 +9,7 @@ import entity.Item;
 import entity.Order;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Boundary {
 
@@ -291,6 +288,18 @@ public class Boundary {
         }
 
         Map<Item, Integer> cofferAndSale = new HashMap<>();
+
+        for(Order order: orders)
+        {
+            for(Map.Entry<Item, Integer> entry: order.getItemAndItsQuantity().entrySet()){
+                Item itemKey = entry.getKey();
+                if (itemKey.getSort().equalsIgnoreCase("coffee"))
+                {
+                    cofferAndSale.put(itemKey, 0);
+                }
+            }
+        }
+
         for(Order order: orders)
         {
             for(Map.Entry<Item, Integer> entry: order.getItemAndItsQuantity().entrySet()){
@@ -304,7 +313,20 @@ public class Boundary {
             order.getItemAndItsQuantity();
         }
 
+        List<Map.Entry<Item, Integer>> infoIds = new ArrayList<Map.Entry<Item, Integer>>(cofferAndSale.entrySet());
+        ArrayList<Integer> sales = new ArrayList<>();
+        int sale = 0;
+        Collections.sort(infoIds, new Comparator<Map.Entry<Item, Integer>>() {
+            public int compare(Map.Entry<Item, Integer> o1, Map.Entry<Item, Integer> o2) {
+                return (o2.getValue() - o1.getValue());
+                //return (o1.getKey()).toString().compareTo(o2.getKey());
+            }
+        });
 
+        for (int i = 0; i < infoIds.size(); i++) {
+            String id = infoIds.get(i).getKey().getItemName();
+            System.out.println("coffee name: " + id +"sale: " + infoIds.get(i).getValue() );
+        }
     }
 
 
