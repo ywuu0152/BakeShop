@@ -337,6 +337,10 @@ public class Boundary {
 
     }
 
+    public void showDaysOfWeekMadeMostSale() {
+
+    }
+
 
 
     public void chooseOption(){
