@@ -199,7 +199,7 @@ public class Boundary {
             }
             System.out.println("The coffee bean sales of store(in quantity) " + i +" this month are " + quantity);
         }
-
+        pressToContinue();
 
     }
 
@@ -226,6 +226,7 @@ public class Boundary {
             }
             System.out.println("The food sales of store " + i + "(in quantity) this month are " + quantity);
         }
+        pressToContinue();
     }
 
     public void showLastMonthCoffeeSold(){
@@ -251,6 +252,7 @@ public class Boundary {
             }
             System.out.println("The food sales of store " + i + "(in quantity) this month are " + quantity);
         }
+        pressToContinue();
     }
 
 
@@ -273,6 +275,7 @@ public class Boundary {
             }
             System.out.println("The total sales of store " + i + "(in dollars) this month are $" + dollars);
         }
+        pressToContinue();
 
     }
 
@@ -322,6 +325,7 @@ public class Boundary {
         {
             System.out.println("coffee name: " + i.getItemName() +"sale: " + cofferAndSale.get(i) );
         }
+
 
 //        List<Map.Entry<Item, Integer>> infoIds = new ArrayList<Map.Entry<Item, Integer>>(cofferAndSale.entrySet());
 //        ArrayList<Integer> sales = new ArrayList<>();
