@@ -21,7 +21,6 @@ public class InventoryController {
     public Inventory inventory = new Inventory();
 
     public InventoryController(String storeID) {
-
         readInventory(storeID);
     }
 

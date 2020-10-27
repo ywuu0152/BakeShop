@@ -19,8 +19,6 @@ public class ItemController {
 
     public ArrayList<Item> itemList = new ArrayList();
 
-
-
     public void readItem(){
         File file = new File("File/Item");
         try {

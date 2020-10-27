@@ -58,7 +58,7 @@ public class Boundary {
         boolean a = true;
         boolean b = true;
         String orderId = "";
-        String storeId = "";
+        String storeId = userController.getCurrentUser().getStoreId();
         String createBy = "";
         String customerPhoneNumber = "null";
         LocalDateTime createTime = LocalDateTime.now();
@@ -66,7 +66,13 @@ public class Boundary {
         double totalPrice = 0;
         String status = "Ready";
         ItemController itemController = new ItemController();
-        InventoryController inventoryController = new InventoryController(userController.getCurrentUser().getStoreId());
+        if (storeId.equals("0")){
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Welcome, Oliver, Please enter the storeID of your current store.(1-10)");
+            storeId = scan.nextLine();
+        }
+            InventoryController inventoryController = new InventoryController(storeId);
+
         Map<Item,Integer> itemAndItsQuantity = new HashMap<>();
 
         while (b) {
@@ -96,7 +102,6 @@ public class Boundary {
             }
 
             orderId = Integer.toString(orderController.getOrderList().size() + 1);
-            storeId = userController.getCurrentUser().getStoreId();
             createBy = userController.getCurrentUser().getId();
             createTime = LocalDateTime.now();
 
