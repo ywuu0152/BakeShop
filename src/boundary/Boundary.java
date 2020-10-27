@@ -92,6 +92,7 @@ public class Boundary {
                         int number = inventoryController.searchItemQuantity(itemName);
                         if (number >= itemNumber) {
                             itemAndItsQuantity.put(i, itemNumber);
+
                             System.out.println("Do you want to continue add item? y/n");
                             a = confirm();
                         } else {

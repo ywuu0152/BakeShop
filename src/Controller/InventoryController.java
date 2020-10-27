@@ -54,5 +54,11 @@ public class InventoryController {
 
      }
 
+    public ArrayList<Inventory> getInventoryList() {
+        return inventoryList;
+    }
 
+    public void setInventoryList(ArrayList<Inventory> inventoryList) {
+        this.inventoryList = inventoryList;
+    }
 }
