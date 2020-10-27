@@ -7,7 +7,6 @@ public class Item {
     private float price;
     private String sort;
 
-
     public Item() {
 
     }

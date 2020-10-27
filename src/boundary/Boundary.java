@@ -131,6 +131,7 @@ public class Boundary {
         }
         orderController.createOrder(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status, customerPhoneNumber);
         System.out.println("Create order successfully!");
+
         System.out.println(orderController.getOrderList().toString());
     }
 
@@ -350,7 +351,6 @@ public class Boundary {
 //            String id = infoIds.get(i).getKey().getItemName();
 //            System.out.println("coffee name: " + id +"sale: " + infoIds.get(i).getValue() );
 //        }
-
     }
 
     public void showDaysOfWeekMadeMostSale() {

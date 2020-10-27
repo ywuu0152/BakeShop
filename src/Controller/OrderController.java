@@ -4,8 +4,8 @@ import entity.Inventory;
 import entity.Item;
 import entity.Order;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -38,7 +38,7 @@ public class OrderController {
         try {
             Scanner scan = new Scanner(file);
 
-            while (scan.hasNextLine()){
+            while (scan.hasNext()){
                 Order order = new Order();
                 String textLine = scan.nextLine();
                 String[] str = textLine.split(",");
@@ -47,23 +47,16 @@ public class OrderController {
                 order.setCreateBy(str[2]);
                 String[] orderItem = str[3].split("/");
                 String[] orderQuantity = str[4].split("/");
-                String[] orderUnitPrice = str[5].split("/");
+                order.setTotalPrice(Float.parseFloat(str[5]));
                 for (int i = 0; i < orderItem.length; i++) {
                     order.getItemAndItsQuantity().put(itemController.searchItemByName(orderItem[i]), Integer.parseInt(orderQuantity[i]));
                 }
 
-                float total = 0;
-
-                for (int i = 0; i < orderQuantity.length; i++) {
-                    total += Integer.parseInt(orderQuantity[i]) * Float.parseFloat(orderUnitPrice[i]);
-                }
-                order.setTotalPrice(total);
-
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy H:mm");
-                LocalDateTime date = LocalDateTime.parse(str[7] + " " + str[8], formatter);
-                order.setCustomerName(str[9]);
-                order.setStatus(str[10]);
-                order.setCustomerPhoneNumber(str[11]);
+                LocalDateTime date = LocalDateTime.parse(str[6], formatter);
+                order.setCustomerName(str[7]);
+                order.setStatus(str[8]);
+                order.setCustomerPhoneNumber(str[9]);
 
                 order.setCreateTime(date);
 
@@ -80,8 +73,40 @@ public class OrderController {
                             String customerName, double totalPrice, String storeId, String status, String customerPhoneNumber) {
         Order order = new Order(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status, customerPhoneNumber);
         orderList.add(order);
+        writeOrder(orderList);
     }
 
+    public void writeOrder(ArrayList<Order> orderList){
+        try {
+
+            String pattern = "MM/dd/yyyy H:mm";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+
+            File file = new File("File/Order");
+            PrintStream ps = new PrintStream(new FileOutputStream(file));
+
+            for (Order o: orderList) {
+                String orderItem = "";
+                String orderQtt = "";
+
+                for (Map.Entry<Item, Integer> entry: o.getItemAndItsQuantity().entrySet()){
+                    orderItem = orderItem + entry.getKey().getItemName() + "/";
+                    orderQtt = orderQtt + entry.getValue() + "/";
+                }
+                String format = formatter.format(o.getCreateTime());
+                String output = o.getStoreId() + "," + o.getOrderId() + "," +
+                        o.getCreateBy() + "," + orderItem + "," + orderQtt + "," + o.getTotalPrice() + "," + format + "," + o.getCustomerName()
+                        + "," + o.getStatus()+ "," + o.getCustomerPhoneNumber();
+                System.out.println(output);
+                ps.println(output);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 }
 

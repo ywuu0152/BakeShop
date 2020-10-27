@@ -110,9 +110,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "orderId='" + orderId + '\'' +
-                ", itemAndItsQuantity=" +
-                itemAndItsQuantity
-                + '\'' +
+                ", itemAndItsQuantity=" +itemAndItsQuantity + '\'' +
                 ", createBy= " + createBy + '\'' +
                 ", createTime=" + createTime + '\'' +
                 ", status=" + status + '\'' +
