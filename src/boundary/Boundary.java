@@ -17,6 +17,7 @@ public class Boundary {
     private ItemController itemController = new ItemController();
     private OrderController orderController = new OrderController();
     private InventoryController inventoryController;
+    Inventory inventory = new Inventory();
 
     public UserController getUserController() {
         return userController;
@@ -91,7 +92,10 @@ public class Boundary {
                         }
                         int number = inventoryController.searchItemQuantity(itemName);
                         if (number >= itemNumber) {
+
                             itemAndItsQuantity.put(i, itemNumber);
+
+                            inventory.getItemAndItsQuantity().put(itemController.searchItemByName(itemName), number - itemNumber);
 
                             System.out.println("Do you want to continue add item? y/n");
                             a = confirm();

@@ -14,8 +14,6 @@ public class InventoryController {
 //        InventoryController inventoryController = new InventoryController("1");
 //    }
 
-
-
     private ArrayList<Inventory> inventoryList = new ArrayList<>();
     ItemController itemController = new ItemController();
     public Inventory inventory = new Inventory();
