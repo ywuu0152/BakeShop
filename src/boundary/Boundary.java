@@ -121,7 +121,7 @@ public class Boundary {
             }
 
             System.out.println("Total price: $" + totalPrice);
-            System.out.println("Do you want to confirm this order?");
+            System.out.println("Do you want to confirm this order? Press y to confirm or n to exit");
             b = confirm1();
 
             if (b) {
@@ -337,6 +337,8 @@ public class Boundary {
             System.out.println("coffee name: " + i.getItemName() +"sale: " + cofferAndSale.get(i) );
         }
 
+        pressToContinue();
+
 
 //        List<Map.Entry<Item, Integer>> infoIds = new ArrayList<Map.Entry<Item, Integer>>(cofferAndSale.entrySet());
 //        ArrayList<Integer> sales = new ArrayList<>();
@@ -403,7 +405,7 @@ public class Boundary {
     public Boolean confirm(){
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
-        if (choice.equals("n")){
+        if (choice.toUpperCase().equals("N")){
             return false;
         }else {
             return true;
@@ -413,7 +415,7 @@ public class Boundary {
     public Boolean confirm1(){
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
-        if (choice.equals("y")){
+        if (choice.toUpperCase().equals("Y")){
             return false;
         }else {
             return true;
