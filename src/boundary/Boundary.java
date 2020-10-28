@@ -8,8 +8,11 @@ import entity.Inventory;
 import entity.Item;
 import entity.Order;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+
+import static java.lang.Double.parseDouble;
 
 public class Boundary {
 
@@ -164,6 +167,7 @@ public class Boundary {
                 System.out.println("4. Show the total number of coffee items sold in last month in each store");
                 System.out.println("5. Show the total sale made in dollars last month in each store");
                 System.out.println("6. Show the type of coffee sold the most per store in the last month");
+                System.out.println("7. Show the days made the most sale in the last month");
                 break;
 
             case "Staff":
@@ -356,8 +360,71 @@ public class Boundary {
     }
 
     public void showDaysOfWeekMadeMostSale() {
+        ArrayList<Order> orders = orderController.getOrderList();
+        Map<LocalDateTime, Double> DateTimeAndSale = new HashMap<>();
+        LocalDateTime currentDate = LocalDateTime.now();
+
+        for (Order order : orders) {
+            for (Map.Entry<Item, Integer> entry : order.getItemAndItsQuantity().entrySet()) {
+                double quantity = entry.getValue();
+                if (order.getCreateTime().isAfter(currentDate.minusMonths(1))) {
+                   DateTimeAndSale.put(order.getCreateTime(), quantity);
+               }
+
+            }
+        }
+
+
+        for (Map.Entry<LocalDateTime, Double> entry : DateTimeAndSale.entrySet()) {
+            LocalDateTime dateTime = entry.getKey();
+            double sale = entry.getValue();
+            if (DateTimeAndSale.containsKey(dateTime)) {
+                double sum = parseDouble(DateTimeAndSale.get(dateTime).toString());
+                sale += sum;
+                DateTimeAndSale.put(dateTime, sale);
+            }
+
+        }
+
+        for (int i = 1; i<11; i++) {
+            for (Order order : orders) {
+                int storeId = Integer.parseInt(order.getStoreId());
+                if (storeId == i) {
+                    double max = 0.0;
+                    double value = 0.0;
+                    String temp = " ";
+                    for (LocalDateTime key : DateTimeAndSale.keySet()) {
+                        value = DateTimeAndSale.get(key);
+                        if (max < value) {
+                            max = value;
+                            temp = key.toString();
+                        }
+                    }
+                    System.out.println("The most sale is" + " "+ max + ", " + "the day made the most sale is" +" " + temp );
+                }
+            }
+        }
+
+
+
+
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -391,6 +458,10 @@ public class Boundary {
                     break;
                 case "6":
                     typeCoffeeSoldMostLastMonth();
+                    a = false;
+                    break;
+                case "7":
+                    showDaysOfWeekMadeMostSale();
                     a = false;
                     break;
 
