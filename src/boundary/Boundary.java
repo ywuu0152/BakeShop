@@ -156,6 +156,7 @@ public class Boundary {
                 System.out.println("4. Show the total number of coffee items sold in last month in each store");
                 System.out.println("5. Show the total sale made in dollars last month in each store");
                 System.out.println("6. Show the type of coffee sold the most per store in the last month");
+                System.out.println("7. Show the days made the most sale in the last month");
                 break;
 
             case "Owner":
@@ -174,11 +175,11 @@ public class Boundary {
                 System.out.println("Welcome to the Bask shop system!");
                 System.out.println("Please choose the options below:");
                 System.out.println("1. Create order");
-                System.out.println("2. Show the total number of coffee beans sold in last month in each store");
-                System.out.println("3. Show the total number of food items sold in last month in each store");
-                System.out.println("4. Show the total number of coffee items sold in last month in each store");
-                System.out.println("5. Show the total sale made in dollars last month in each store");
-                System.out.println("6. Show the type of coffee sold the most per store in the last month");
+//              System.out.println("2. Show the total number of coffee beans sold in last month in each store");
+//              System.out.println("3. Show the total number of food items sold in last month in each store");
+//              System.out.println("4. Show the total number of coffee items sold in last month in each store");
+//              System.out.println("5. Show the total sale made in dollars last month in each store");
+//              System.out.println("6. Show the type of coffee sold the most per store in the last month");
                 break;
         }
 
