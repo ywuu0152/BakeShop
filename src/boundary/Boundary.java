@@ -362,22 +362,22 @@ public class Boundary {
 
     public void showDaysOfWeekMadeMostSale() {
         ArrayList<Order> orders = orderController.getOrderList();
-        Map<LocalDateTime, Double> DateTimeAndSale = new HashMap<>();
-        LocalDateTime currentDate = LocalDateTime.now();
+        Map<LocalDate, Double> DateTimeAndSale = new HashMap<>();
+        LocalDate currentDate = LocalDate.now();
 
         for (Order order : orders) {
             for (Map.Entry<Item, Integer> entry : order.getItemAndItsQuantity().entrySet()) {
                 double quantity = entry.getValue();
-                if (order.getCreateTime().isAfter(currentDate.minusMonths(1))) {
-                   DateTimeAndSale.put(order.getCreateTime(), quantity);
+                if (order.getCreateTime().toLocalDate().isAfter(currentDate.minusMonths(1))) {
+                   DateTimeAndSale.put(order.getCreateTime().toLocalDate(), quantity);
                }
 
             }
         }
 
 
-        for (Map.Entry<LocalDateTime, Double> entry : DateTimeAndSale.entrySet()) {
-            LocalDateTime dateTime = entry.getKey();
+        for (Map.Entry<LocalDate, Double> entry : DateTimeAndSale.entrySet()) {
+            LocalDate dateTime = entry.getKey();
             double sale = entry.getValue();
             if (DateTimeAndSale.containsKey(dateTime)) {
                 double sum = parseDouble(DateTimeAndSale.get(dateTime).toString());
@@ -394,7 +394,7 @@ public class Boundary {
                     double max = 0.0;
                     double value = 0.0;
                     String temp = " ";
-                    for (LocalDateTime key : DateTimeAndSale.keySet()) {
+                    for (LocalDate key : DateTimeAndSale.keySet()) {
                         value = DateTimeAndSale.get(key);
                         if (max < value) {
                             max = value;
@@ -406,11 +406,6 @@ public class Boundary {
             }
         }
         pressToContinue();
-
-
-
-
-
 
 
     }
