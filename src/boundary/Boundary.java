@@ -404,6 +404,9 @@ public class Boundary {
                 }
             }
         }
+        pressToContinue();
+
+
 
 
 
