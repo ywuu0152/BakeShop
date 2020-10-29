@@ -15,8 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import static java.lang.Double.parseDouble;
-
 public class Boundary {
 
     private UserController userController = new UserController();
@@ -73,10 +71,23 @@ public class Boundary {
         double totalPrice = 0;
         String status = "Ready";
         ItemController itemController = new ItemController();
+
         if (storeId.equals("0")){
-            Scanner scan = new Scanner(System.in);
             System.out.println("Welcome, Oliver, Please enter the storeID of your current store.(1-10)");
-            storeId = scan.nextLine();
+            boolean c = true;
+            while (c) {
+                Scanner scan = new Scanner(System.in);
+                if (scan.hasNextInt()) {
+                    storeId = scan.next();
+                    if (Integer.parseInt(storeId) >= 1 && Integer.parseInt(storeId) <= 10){
+                        c = false;
+                    }else {
+                        System.out.println("Please input a number (1-10)");
+                    }
+                } else {
+                    System.out.println("Please input a number (1-10)");
+                }
+            }
         }
             InventoryController inventoryController = new InventoryController(storeId);
 
@@ -88,7 +99,9 @@ public class Boundary {
                 System.out.println("Please enter your item name");
                 String itemName = scan.nextLine();
                 System.out.println("Please enter your item quantity");
-                int itemNumber = scan.nextInt();
+                String num;
+                int itemNumber = 0;
+
                 for (Item i : itemController.itemList) {
                     if (i.getItemName().equals(itemName)) {
                         if (itemName.equals("coffee beans")){
@@ -96,6 +109,15 @@ public class Boundary {
                             Scanner scanner = new Scanner(System.in);
                             customerPhoneNumber = scanner.nextLine();
                         }
+
+                        if(scan.hasNextInt()){
+                            itemNumber = Integer.parseInt(scan.next());
+
+                        }else {
+                            System.out.println("Please input a number");
+                            break;
+                        }
+
                         int number = inventoryController.searchItemQuantity(itemName);
                         if (number >= itemNumber) {
 
@@ -105,10 +127,15 @@ public class Boundary {
 
                             System.out.println("Do you want to continue add item? y/n");
                             a = confirm();
+                            break;
                         } else {
-                            System.out.println("Item does not exit or the inventory of this item is not enough");
+                            System.out.println("The inventory of this item is not enough");
                         }
+                    }else {
+                        System.out.println("Item does not exit");
+                        break;
                     }
+
                 }
             }
 
