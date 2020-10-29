@@ -1,14 +1,5 @@
-import Controller.InventoryController;
-import Controller.ItemController;
-import Controller.OrderController;
-import Controller.UserController;
 import boundary.Boundary;
-import entity.Item;
-import entity.Order;
-import entity.User;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Login {
@@ -32,7 +23,6 @@ public class Login {
     }
 
     Boundary boundary = new Boundary();
-
 
 
     public void enter() {

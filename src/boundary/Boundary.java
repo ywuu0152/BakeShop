@@ -10,7 +10,10 @@ import entity.Order;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 import static java.lang.Double.parseDouble;
 
@@ -282,7 +285,7 @@ public class Boundary {
             }
         }
         for (int i = 1; i < 11; i++) {
-            int dollars = 0;
+            double dollars = 0;
             for (Order o: newOrderList) {
                 int storeId = Integer.parseInt(o.getStoreId());
                 if (storeId == i) {
@@ -414,6 +417,17 @@ public class Boundary {
         pressToContinue();
 
 
+    }
+
+    public void showMonthlyFoodSold(){
+        ArrayList<Order> newOrderList= new ArrayList();
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        for (Order o: orderController.getOrderList()) {
+            if (o.getCreateTime().isAfter(currentTime.minusDays(30))) {
+                newOrderList.add(o);
+            }
+        }
     }
 
 
