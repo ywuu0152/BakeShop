@@ -37,7 +37,6 @@ public class OrderController {
         File file = new File("File/Order");
         try {
             Scanner scan = new Scanner(file);
-
             while (scan.hasNext()){
                 Order order = new Order();
                 String textLine = scan.nextLine();
@@ -51,15 +50,12 @@ public class OrderController {
                 for (int i = 0; i < orderItem.length; i++) {
                     order.getItemAndItsQuantity().put(itemController.searchItemByName(orderItem[i]), Integer.parseInt(orderQuantity[i]));
                 }
-
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy H:mm");
                 LocalDateTime date = LocalDateTime.parse(str[6], formatter);
                 order.setCustomerName(str[7]);
                 order.setStatus(str[8]);
                 order.setCustomerPhoneNumber(str[9]);
-
                 order.setCreateTime(date);
-
                 orderList.add(order);
             }
 //            System.out.println(orderList.toString());
@@ -78,7 +74,6 @@ public class OrderController {
 
     public void writeOrder(ArrayList<Order> orderList){
         try {
-
             String pattern = "MM/dd/yyyy H:mm";
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
 
@@ -100,12 +95,9 @@ public class OrderController {
                 System.out.println(output);
                 ps.println(output);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 }

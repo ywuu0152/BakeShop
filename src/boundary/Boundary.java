@@ -98,12 +98,11 @@ public class Boundary {
                 Scanner scan = new Scanner(System.in);
                 System.out.println("Please enter your item name");
                 String itemName = scan.nextLine();
-                System.out.println("Please enter your item quantity");
                 String num;
                 int itemNumber = 0;
-
                 for (Item i : itemController.itemList) {
                     if (i.getItemName().equals(itemName)) {
+                        System.out.println("Please enter your item quantity");
                         if (itemName.equals("coffee beans")){
                             System.out.println("Please enter the phone number of customer");
                             Scanner scanner = new Scanner(System.in);
@@ -111,10 +110,15 @@ public class Boundary {
                         }
 
                         if(scan.hasNextInt()){
-                            itemNumber = Integer.parseInt(scan.next());
-
+                            int number = Integer.parseInt(scan.next());
+                            if (number > 0 && number <= 10){
+                                itemNumber = number;
+                            }else {
+                                System.out.println("Please input a number between 1 to 10");
+                                break;
+                            }
                         }else {
-                            System.out.println("Please input a number");
+                            System.out.println("Please input a number between 1 to 10");
                             break;
                         }
 
@@ -135,7 +139,6 @@ public class Boundary {
                         System.out.println("Item does not exit");
                         break;
                     }
-
                 }
             }
 
@@ -152,7 +155,6 @@ public class Boundary {
                 totalPrice += key.getPrice() * itemAndItsQuantity.get(key);
                 System.out.println(key.getItemName() + "   " + itemAndItsQuantity.get(key));
             }
-
             System.out.println("Total price: $" + totalPrice);
             System.out.println("Do you want to confirm this order? Press y to confirm or n to exit");
             b = confirm1();
@@ -162,6 +164,8 @@ public class Boundary {
                 a = true;
             }
         }
+
+
         orderController.createOrder(orderId, itemAndItsQuantity, createBy, createTime, customerName, totalPrice, storeId, status, customerPhoneNumber);
         System.out.println("Create order successfully!");
         pressToContinue();
@@ -445,31 +449,6 @@ public class Boundary {
 
 
     }
-
-    public void showMonthlyFoodSold(){
-        ArrayList<Order> newOrderList= new ArrayList();
-        LocalDateTime currentTime = LocalDateTime.now();
-
-        for (Order o: orderController.getOrderList()) {
-            if (o.getCreateTime().isAfter(currentTime.minusDays(30))) {
-                newOrderList.add(o);
-            }
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
