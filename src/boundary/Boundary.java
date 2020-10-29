@@ -541,6 +541,7 @@ public class Boundary {
 
     public void pressToContinue() {
         while (true) {
+            System.out.println("=============================================================");
             System.out.println("Press N to exit, or any other keys to back to main menu");
             Scanner sc = new Scanner(System.in);
             String ifContinue = sc.nextLine();
