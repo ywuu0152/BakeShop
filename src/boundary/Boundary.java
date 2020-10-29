@@ -361,44 +361,50 @@ public class Boundary {
     }
 
     public void showDaysOfWeekMadeMostSale() {
-        ArrayList<Order> orders = orderController.getOrderList();
-        Map<LocalDate, Double> DateTimeAndSale = new HashMap<>();
+        //ArrayList<Order> orders = orderController.getOrderList();
+        Map<String, Double> DateTimeAndSale = new HashMap<>();
         LocalDate currentDate = LocalDate.now();
 
-        for (Order order : orders) {
-            for (Map.Entry<Item, Integer> entry : order.getItemAndItsQuantity().entrySet()) {
-                double quantity = entry.getValue();
-                if (order.getCreateTime().toLocalDate().isAfter(currentDate.minusMonths(1))) {
-                   DateTimeAndSale.put(order.getCreateTime().toLocalDate(), quantity);
-               }
-
-            }
-        }
+        ArrayList<Order> newOrderList= new ArrayList();
 
 
-        for (Map.Entry<LocalDate, Double> entry : DateTimeAndSale.entrySet()) {
-            LocalDate dateTime = entry.getKey();
-            double sale = entry.getValue();
-            if (DateTimeAndSale.containsKey(dateTime)) {
-                double sum = DateTimeAndSale.get(dateTime);
-                sale += sum;
-                DateTimeAndSale.put(dateTime, sale);
+        for (Order order: orderController.getOrderList()) {
+            //String date = "";
+            //double price = DateTimeAndSale.containsKey(date) ? DateTimeAndSale.get(date) : 0 ;/double price = 0;
+            String date = "";
+            double price = 0;
+            if (order.getCreateTime().toLocalDate().isAfter(currentDate.minusDays(30))) {
+                    date = order.getCreateTime().toLocalDate().toString();
+                    price = order.getTotalPrice();
+                    DateTimeAndSale.merge(date, price, Double::sum);
+                    newOrderList.add(order);
             }
 
         }
+
+
+//        for (Map.Entry<String, Double> entry : DateTimeAndSale.entrySet()) {
+//            String dateTime = entry.getKey();
+//            double sale = entry.getValue();
+//            if (DateTimeAndSale.containsKey(dateTime)) {
+//                double sum = DateTimeAndSale.get(dateTime);
+//                sale += sum;
+//                DateTimeAndSale.put(dateTime, sale);
+//            }
+//       }
 
         for (int i = 1; i<11; i++) {
-            for (Order order : orders) {
+            for (Order order: newOrderList) {
                 int storeId = Integer.parseInt(order.getStoreId());
                 if (storeId == i) {
                     double max = 0.0;
                     double value = 0.0;
                     String date = " ";
-                    for (LocalDate key : DateTimeAndSale.keySet()) {
+                    for (String key : DateTimeAndSale.keySet()) {
                         value = DateTimeAndSale.get(key);
                         if (max < value) {
                             max = value;
-                            date = key.toString();
+                            date = key;
                         }
                     }
                     System.out.println("The most sale is" + " "+ max + ", " + "the day made the most sale is" +" " + date );
