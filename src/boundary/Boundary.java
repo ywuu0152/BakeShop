@@ -380,7 +380,7 @@ public class Boundary {
             LocalDate dateTime = entry.getKey();
             double sale = entry.getValue();
             if (DateTimeAndSale.containsKey(dateTime)) {
-                double sum = parseDouble(DateTimeAndSale.get(dateTime).toString());
+                double sum = DateTimeAndSale.get(dateTime);
                 sale += sum;
                 DateTimeAndSale.put(dateTime, sale);
             }
@@ -393,15 +393,15 @@ public class Boundary {
                 if (storeId == i) {
                     double max = 0.0;
                     double value = 0.0;
-                    String temp = " ";
+                    String date = " ";
                     for (LocalDate key : DateTimeAndSale.keySet()) {
                         value = DateTimeAndSale.get(key);
                         if (max < value) {
                             max = value;
-                            temp = key.toString();
+                            date = key.toString();
                         }
                     }
-                    System.out.println("The most sale is" + " "+ max + ", " + "the day made the most sale is" +" " + temp );
+                    System.out.println("The most sale is" + " "+ max + ", " + "the day made the most sale is" +" " + date );
                 }
             }
         }
