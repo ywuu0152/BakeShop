@@ -247,7 +247,14 @@ public class Boundary {
 //                    quantity = o.getItemAndItsQuantity().get(item);
                 }
             }
-            System.out.println("The coffee bean sales of store(in quantity) " + i +" this month are " + quantity);
+
+            if (quantity == 0){
+                System.out.println("--------------------------------------");
+                System.out.println("No sales in store " + i + " last month");
+            }else {
+                System.out.println("--------------------------------------");
+                System.out.println("Store " + i + " sales: " + quantity);
+            }
         }
         pressToContinue();
 
@@ -262,6 +269,8 @@ public class Boundary {
                 newOrderList.add(o);
             }
         }
+        System.out.println("--------------------------------------");
+        System.out.println("Time" + currentTime);
         for (int i = 1; i < 11; i++) {
             int quantity = 0;
             for (Order o: newOrderList) {
@@ -274,7 +283,13 @@ public class Boundary {
                     }
                 }
             }
-            System.out.println("The food sales of store " + i + "(in quantity) this month are " + quantity);
+            if (quantity == 0){
+                System.out.println("--------------------------------------");
+                System.out.println("No sales in store " + i + " last month");
+            }else {
+                System.out.println("--------------------------------------");
+                System.out.println("Store " + i + " sales: " + quantity);
+            }
         }
         pressToContinue();
     }
@@ -288,6 +303,8 @@ public class Boundary {
                 newOrderList.add(o);
             }
         }
+        System.out.println("--------------------------------------");
+        System.out.println("Time: " + currentTime);
         for (int i = 1; i < 11; i++) {
             int quantity = 0;
             for (Order o: newOrderList) {
@@ -300,7 +317,15 @@ public class Boundary {
                     }
                 }
             }
-            System.out.println("The food sales of store " + i + "(in quantity) this month are " + quantity);
+
+            if (quantity == 0){
+                System.out.println("--------------------------------------");
+                System.out.println("No sales in store " + i + " last month");
+
+            }else {
+                System.out.println("--------------------------------------");
+                System.out.println("Store " + i + " sales: " + quantity);
+            }
         }
         pressToContinue();
     }
@@ -315,6 +340,8 @@ public class Boundary {
                 newOrderList.add(o);
             }
         }
+        System.out.println("--------------------------------------");
+        System.out.println("Time" + currentTime);
         for (int i = 1; i < 11; i++) {
             double dollars = 0;
             for (Order o: newOrderList) {
@@ -323,7 +350,8 @@ public class Boundary {
                     dollars += o.getTotalPrice();
                 }
             }
-            System.out.println("The total sales of store " + i + "(in dollars) this month are $" + dollars);
+            System.out.println("--------------------------------------");
+            System.out.println("The total sales of store " + i + ":" + " $ " + dollars);
         }
         pressToContinue();
 
