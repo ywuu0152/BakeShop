@@ -92,7 +92,12 @@ public class OrderController {
                 String output = o.getStoreId() + "," + o.getOrderId() + "," +
                         o.getCreateBy() + "," + orderItem + "," + orderQtt + "," + o.getTotalPrice() + "," + format + "," + o.getCustomerName()
                         + "," + o.getStatus()+ "," + o.getCustomerPhoneNumber();
-                System.out.println(output);
+
+                System.out.println("StoreId: " + o.getStoreId() + "," + "Order Id: " + o.getOrderId() + "," +
+                        "Create by staff id: " + o.getCreateBy() + "," + "The item name and its quantity: " + orderItem + ","
+                        + orderQtt + "," + "Total price:" + o.getTotalPrice() + "," + "Time" + format + "," + "Customer name: "
+                        + o.getCustomerName() + "," + "Status" + o.getStatus()+ "," + "Customer phone number: " + o.getCustomerPhoneNumber());
+//                System.out.println(output);
                 ps.println(output);
             }
         } catch (IOException e) {
