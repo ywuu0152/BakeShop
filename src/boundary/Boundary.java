@@ -8,6 +8,7 @@ import entity.Inventory;
 import entity.Item;
 import entity.Order;
 
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -526,6 +527,7 @@ public class Boundary {
 
 
 
+
     public Boolean confirm(){
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
@@ -549,16 +551,20 @@ public class Boundary {
     public void pressToContinue() {
         while (true) {
             System.out.println("=============================================================");
+            System.out.println("=============================================================");
             System.out.println("Press N to exit, or any other keys to back to main menu");
             Scanner sc = new Scanner(System.in);
             String ifContinue = sc.nextLine();
             if (ifContinue.toUpperCase().equals("N"))
-                break;
+                System.exit(0);
             else
                 showMenu();
                 chooseOption();
         }
     }
-    }
+
+
+}
+
 
 
