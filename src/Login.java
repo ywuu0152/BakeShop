@@ -43,7 +43,8 @@ public class Login {
                 System.out.println("Login successfully");
                 a = false;
             }else{
-                System.out.println("Login unsuccessfully, please re-enter your username and password");
+                System.out.println("Login unsuccessfully, Something incorrect of your username or password");
+                System.out.println("Please re-enter your username and password");
             }
         }
     }
