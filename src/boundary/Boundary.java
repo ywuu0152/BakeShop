@@ -97,7 +97,14 @@ public class Boundary {
         while (b) {
             while (a) {
                 Scanner scan = new Scanner(System.in);
-                System.out.println("Please enter your item name");
+                System.out.println("=============================================");
+                System.out.println("Today we offer: ");
+                System.out.println("Coffee: ice coffee, Cappuccino");
+                System.out.println("Food: toast skagen, chocolate chip pancake");
+                System.out.println("Coffee beans");
+                System.out.println("=============================================");
+                System.out.println("Please enter your item name from above");
+                System.out.println("=============================================");
                 String itemName = scan.nextLine();
                 String num;
                 int itemNumber = 0;
@@ -115,11 +122,11 @@ public class Boundary {
                             if (number > 0 && number <= 10){
                                 itemNumber = number;
                             }else {
-                                System.out.println("Please input a number between 1 to 10");
+                                System.out.println("Invalid number! Please input a number between 1 to 10");
                                 break;
                             }
                         }else {
-                            System.out.println("Please input a number between 1 to 10");
+                            System.out.println("Invalid number! Please input a number between 1 to 10");
                             break;
                         }
 
@@ -425,7 +432,7 @@ public class Boundary {
 
     public void showDaysOfWeekMadeMostSale() {
         //ArrayList<Order> orders = orderController.getOrderList();
-        Map<String, Double> DateTimeAndSale = new HashMap<>();
+        Map<LocalDate, Double> DateTimeAndSale = new HashMap<>();
         LocalDate currentDate = LocalDate.now();
 
         ArrayList<Order> newOrderList= new ArrayList();
@@ -434,11 +441,11 @@ public class Boundary {
         for (Order order: orderController.getOrderList()) {
             //String date = "";
             //double price = DateTimeAndSale.containsKey(date) ? DateTimeAndSale.get(date) : 0 ;/double price = 0;
-            String date = "";
-            double price = 0;
+            //String date = "";
+            //double price = 0;
             if (order.getCreateTime().toLocalDate().isAfter(currentDate.minusDays(30))) {
-                    date = order.getCreateTime().toLocalDate().toString();
-                    price = order.getTotalPrice();
+                    LocalDate date = order.getCreateTime().toLocalDate();
+                    double price = order.getTotalPrice();
                     DateTimeAndSale.merge(date, price, Double::sum);
                     newOrderList.add(order);
             }
@@ -462,15 +469,17 @@ public class Boundary {
                 if (storeId == i) {
                     double max = 0.0;
                     double value = 0.0;
-                    String date = " ";
-                    for (String key : DateTimeAndSale.keySet()) {
+                    LocalDate date;
+                    for (LocalDate key : DateTimeAndSale.keySet()) {
                         value = DateTimeAndSale.get(key);
                         if (max < value) {
                             max = value;
                             date = key;
+                            System.out.println("The most sale is" + " "+ max + ", " + "the day made the most sale is" +" " + date.getDayOfWeek() );
                         }
+
                     }
-                    System.out.println("The most sale is" + " "+ max + ", " + "the day made the most sale is" +" " + date );
+
                 }
             }
         }
