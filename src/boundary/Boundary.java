@@ -181,6 +181,74 @@ public class Boundary {
 //        System.out.println(orderController.getOrderList().toString());
     }
 
+    public void addInventory(){
+        String storeId = userController.getCurrentUser().getStoreId();
+        int quantity;
+        boolean a = true;
+        Scanner scan = new Scanner(System.in);
+
+        if (storeId.equals("0")){
+            System.out.println("Welcome, Oliver, Please enter the storeID of your current store.(1-10)");
+
+            boolean c = true;
+            while (c) {
+                Scanner scanner = new Scanner(System.in);
+                if (scan.hasNextInt()) {
+                    storeId = scanner.next();
+                    if (Integer.parseInt(storeId) >= 1 && Integer.parseInt(storeId) <= 10){
+                        c = false;
+                    }else {
+                        System.out.println("Please input a number (1-10)");
+                    }
+                } else {
+                    System.out.println("Please input a number (1-10)");
+                }
+            }
+        }
+
+        InventoryController inventoryController = new InventoryController(storeId);
+
+        System.out.println(inventoryController.getInventoryList().toString());
+
+        System.out.println("Please enter the item name you want to increase inventory");
+        String itemName = scan.nextLine();
+
+        while (a) {
+            for (Item i : itemController.itemList) {
+                if (i.getItemName().equals(itemName)) {
+                    System.out.println("Please enter the quantity");
+                    if (scan.hasNextInt()) {
+                        int number = Integer.parseInt(scan.next());
+                        if (number > 0 && number <= 999) {
+                            quantity = number;
+                        } else {
+                            System.out.println("Invalid number! Please re-input");
+                            break;
+                        }
+                    } else {
+                        System.out.println("Invalid number! Please re-input");
+                        break;
+                    }
+                    int number = inventoryController.searchItemQuantity(itemName);
+
+                    inventory.getItemAndItsQuantity().put(itemController.searchItemByName(itemName), quantity + number);
+
+                    inventoryController.getInventoryList().add(inventory);
+
+                    System.out.println("Inventory increase successfully");
+
+                    System.out.println("The inventory of " + itemName + "now is: " + (quantity + number));
+                    a = false;
+                    break;
+                } else {
+                    System.out.println("Item does not exit");
+                    break;
+                }
+            }
+        }
+
+    }
+
     public void showCreateCoffeeBeansOrderPage(){
 
     }
@@ -201,6 +269,7 @@ public class Boundary {
                 System.out.println("6. Show the type of coffee sold the most per store in the last month");
                 System.out.println("7. Show the days made the most sale in the last month");
                 System.out.println("8. Show items with low quantity");
+                System.out.println("9. Increase inventory ");
                 break;
 
             case "Owner":
@@ -214,6 +283,7 @@ public class Boundary {
                 System.out.println("6. Show the type of coffee sold the most per store in the last month");
                 System.out.println("7. Show the days made the most sale in the last month");
                 System.out.println("8. Show items with low quantity");
+                System.out.println("9. Increase inventory ");
                 break;
 
             case "Staff":
@@ -405,7 +475,6 @@ public class Boundary {
 
     }
 
-
     public void typeCoffeeSoldMostLastMonth(){
         ArrayList<Order> orders = new ArrayList<>();
         LocalDateTime currentDate = LocalDateTime.now();
@@ -564,6 +633,10 @@ public class Boundary {
                     break;
                 case "8":
                     showLowInInventory();
+                    a = false;
+                    break;
+                case "9":
+                    addInventory();
                     a = false;
                     break;
 
