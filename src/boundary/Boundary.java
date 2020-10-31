@@ -9,6 +9,7 @@ import entity.Item;
 import entity.Order;
 
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class Boundary {
     }
 
     public boolean login(String userName, String passWord){
-       return userController.login(userName, passWord);
+        return userController.login(userName, passWord);
     }
 
     public void showCreateOrderPage(){
@@ -90,7 +91,7 @@ public class Boundary {
                 }
             }
         }
-            InventoryController inventoryController = new InventoryController(storeId);
+        InventoryController inventoryController = new InventoryController(storeId);
 
         Map<Item,Integer> itemAndItsQuantity = new HashMap<>();
 
@@ -199,6 +200,7 @@ public class Boundary {
                 System.out.println("5. Show the total sale made in dollars last month in each store");
                 System.out.println("6. Show the type of coffee sold the most per store in the last month");
                 System.out.println("7. Show the days made the most sale in the last month");
+                System.out.println("8. Show items with low quantity");
                 break;
 
             case "Owner":
@@ -211,6 +213,7 @@ public class Boundary {
                 System.out.println("5. Show the total sale made in dollars last month in each store");
                 System.out.println("6. Show the type of coffee sold the most per store in the last month");
                 System.out.println("7. Show the days made the most sale in the last month");
+                System.out.println("8. Show items with low quantity");
                 break;
 
             case "Staff":
@@ -227,13 +230,50 @@ public class Boundary {
 
     }
 
+    public void showLowInInventory() {
+        System.out.println("Please enter the store id to view the report:");
+        boolean c = true;
+        String storeId = "0";
+        while (c) {
+            Scanner scan = new Scanner(System.in);
+            if (scan.hasNextInt()) {
+                storeId = scan.next();
+                if (Integer.parseInt(storeId) >= 1 && Integer.parseInt(storeId) <= 10){
+                    c = false;
+                }else {
+                    System.out.println("Please input a number (1-10)");
+                }
+            } else {
+                System.out.println("Please input a number (1-10)");
+            }
+        }
+        var controller = new InventoryController(storeId);
+        var inventory = controller.getInventoryList().get(0);
+        var lowItems = new HashMap<Item,Integer>();
+        for(var entry : inventory.getItemAndItsQuantity().entrySet()){
+            if(entry.getValue() < 3){
+                lowItems.put(entry.getKey(), entry.getValue());
+            }
+        }
+        if(lowItems.size() == 0){
+            System.out.println("There is no item with low quantity in store " + storeId);
+            pressToContinue();
+            return;
+        }
+        System.out.println("The following items are in low quantity:");
+        for(var entry : lowItems.entrySet()){
+            System.out.println(entry.getKey().getItemName() + ": " + entry.getValue());
+        }
+        pressToContinue();
+    }
+
     public void showMonthlyCoffeeBeansSold(){
         ArrayList<Order> newOrderList= new ArrayList();
         LocalDateTime currentTime = LocalDateTime.now();
 
         for (Order o: orderController.getOrderList()) {
             if (!o.getCustomerPhoneNumber().equals("null") && o.getCreateTime().isAfter(currentTime.minusDays(30))) {
-                    newOrderList.add(o);
+                newOrderList.add(o);
             }
         }
 
@@ -365,11 +405,6 @@ public class Boundary {
 
     }
 
-    public void showLowInventoryItem() {
-
-        
-    }
-
 
     public void typeCoffeeSoldMostLastMonth(){
         ArrayList<Order> orders = new ArrayList<>();
@@ -444,10 +479,10 @@ public class Boundary {
             //String date = "";
             //double price = 0;
             if (order.getCreateTime().toLocalDate().isAfter(currentDate.minusDays(30))) {
-                    LocalDate date = order.getCreateTime().toLocalDate();
-                    double price = order.getTotalPrice();
-                    DateTimeAndSale.merge(date, price, Double::sum);
-                    newOrderList.add(order);
+                LocalDate date = order.getCreateTime().toLocalDate();
+                double price = order.getTotalPrice();
+                DateTimeAndSale.merge(date, price, Double::sum);
+                newOrderList.add(order);
             }
 
         }
@@ -527,6 +562,10 @@ public class Boundary {
                     showDaysOfWeekMadeMostSale();
                     a = false;
                     break;
+                case "8":
+                    showLowInInventory();
+                    a = false;
+                    break;
 
                 default:
                     System.out.println("input error, please re-input");
@@ -568,7 +607,7 @@ public class Boundary {
                 System.exit(0);
             else
                 showMenu();
-                chooseOption();
+            chooseOption();
         }
     }
 
